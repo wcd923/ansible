@@ -1,0 +1,16 @@
+--- # PLaybook demo of debug statements
+- hosts: '{{myhosts}}'
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: no
+  vars:
+    myhosts: centos
+  tasks:
+  - name: Install telnet package
+    yum:
+      name: telnet
+      state: latest
+    register: yum_result
+  - debug: var=yum_result

@@ -1,0 +1,12 @@
+--- # Variables replacement 
+- hosts: '{{myhosts}}'
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: '{{gather}}'
+  tasks:
+  - name: Install packages
+    yum:
+      name: '{{pkg}}'
+      state: latest

@@ -1,0 +1,28 @@
+--- # Variables replacement 
+
+- hosts: centos 
+  vars_files: 
+    - variables-file.yaml
+    - packages_to_install.yaml
+  vars_prompt:
+    - name: file_name
+      prompt: Enter file name
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: '{{gather}}'
+  tasks:
+  - name: '{{name_description}}' 
+    yum:
+      name: '{{install_package}}'
+      state: latest
+  - name: Create filename on ~/file_name
+    shell: cd ~ && echo "created file" > '{{file_name}}'
+    register: create_file_result
+    notify:
+      - Create another file
+  - debug: var=create_file_result
+  handlers:
+    - name: Create another file
+      shell: cd ~ && touch another_file

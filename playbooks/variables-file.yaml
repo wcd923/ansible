@@ -1,0 +1,4 @@
+--- # With the --- we indicate that this is a configuration file.
+# List of varibles 
+gather: yes
+name_description: Install list of packages
