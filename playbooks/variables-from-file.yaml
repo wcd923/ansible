@@ -2,11 +2,12 @@
 
 - hosts: '{{myhosts}}' 
   vars_files: 
-    - variables-file.yaml
+    - vars.yaml
     - packages_to_install.yaml
   vars_prompt:
     - name: file_name
       prompt: Enter file name
+      default: this_is_a_default_file
   remote_user: ansible
   become: yes
   become_method: sudo

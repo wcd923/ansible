@@ -1,0 +1,18 @@
+--- # Ease of lecture importing files
+- hosts: '{{myhosts}}'
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  vars:
+    variablesi1: include_dir/variables/vars.yml
+    packages1: include_dir/packages/pkgs.yml
+    commands1: include_dir/commands/cmds.yml
+    handlers1: include_dir/handlers/hands.yml
+  vars_files:
+  - "{{variablesi1}}" 
+  tasks:
+  - include: "{{packages1}}"
+  - include: "{{commands1}}"
+  handlers:
+  - include: "{{handlers1}}"

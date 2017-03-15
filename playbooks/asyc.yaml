@@ -2,7 +2,7 @@
 
 - hosts: '{{myhosts}}' 
   vars_files: 
-    - variables-file.yaml
+    - vars.yaml
     - packages_to_install.yaml
   vars_prompt:
     - name: file_name

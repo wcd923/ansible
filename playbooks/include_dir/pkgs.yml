@@ -1,0 +1,10 @@
+--- # List of packages to install for RedHat family
+- name: Install telnet
+  yum:
+    name: telnet
+    state: latest
+- name : Install elinks
+  yum:
+    name: elinks
+    state: latest
+

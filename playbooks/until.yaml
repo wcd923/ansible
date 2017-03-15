@@ -1,0 +1,28 @@
+--- # Conditionals example playbook
+
+- hosts: '{{myhosts}}'
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  connection: ssh
+  vars:
+    playbook_type: until_example
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: Install Apache for RedHat
+      yum:
+        name: httpd
+        state: latest
+    - name: Verify if Apcahe is running
+      shell: systemctl status httpd
+      register: apache_status_result
+      # Repeat this action until given condition. In this case, repeat this shell command
+      # until its return contains "active (running)" with an exit code != -1
+      until: apache_status_result.stdout.find("active (running)") != -1
+      # To avoid doing that as fast as posible and with an infinity retry number we can set
+      # the retry amount and the delay in seconds between each retry
+      retries: 7
+      delay: 3
+    - debug: var=apache_status_result

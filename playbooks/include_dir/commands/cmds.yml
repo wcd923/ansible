@@ -1,0 +1,4 @@
+- name: Write version name
+  shell: echo '{{version}}' > /home/ansible/version_ansible_playbook
+  register: version_result
+- debug: var=version_result

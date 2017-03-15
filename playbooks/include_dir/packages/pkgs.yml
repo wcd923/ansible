@@ -1,0 +1,17 @@
+- name: Install packages
+  package:
+    name: "{{ item }} "
+    state: latest
+  with_items:
+    - tree
+    - elinks
+    - git
+    - vim
+- name: Install Apache
+  apt: name=apache2 state=latest
+  when: ansible_os_family == "Debian"
+- name: Install Apache
+  yum: name=httpd state=latest
+  when: ansible_os_family == "RedHat"
+  notify: restart_httpd
+

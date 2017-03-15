@@ -1,0 +1,11 @@
+--- # Full inlcude tasks example
+
+- hosts: centos
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - include: include_dir/pkgs.yml
+    - name: Verify telnet is installed
+      raw: yum list installed | grep telnet > /home/ansible/pkgs.log

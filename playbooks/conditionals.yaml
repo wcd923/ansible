@@ -1,0 +1,23 @@
+--- # Conditionals example playbook
+
+- hosts: '{{myhosts}}'
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  connection: ssh
+  vars:
+    playbook_type: conditional_example
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: Install Apache for Debian
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_os_family == "Debian" 
+    - name: Install Apache for RedHat
+      yum:
+        name: httpd
+        state: latest
+      when: ansible_os_family == "RedHat"
