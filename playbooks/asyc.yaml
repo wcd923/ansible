@@ -13,10 +13,14 @@
   connection: ssh
   gather_facts: '{{gather}}'
   tasks:
+  - name: simulate long running op, allow to run for 45 sec, check status every 3s
+    command: /bin/sleep 15
+    async: 45
+    poll: 3    
   - name: '{{name_description}}' 
-    package: # Platform independent -  if there are naming differences use yum: or apt:
+    yum: # Platform independent : package - cannot use async
       name: '{{install_package}}'
-      state: latest
+      state: latest 
   - name: Create filename on ~/file_name
     shell: cd ~ && echo "created file" > '{{file_name}}'
     register: create_file_result

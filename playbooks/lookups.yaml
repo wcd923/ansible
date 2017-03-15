@@ -1,0 +1,12 @@
+--- # Lookup playbook example
+- hosts: '{{myhosts}}' 
+  user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: no
+  tasks:
+    # Buscar un string, pasado como argumento, en el archivo superheroes.csv
+    - debug: msg="Lookup SuperHeros for '{{buscar}}' - {{lookup('csvfile', '{{buscar}} file=superheroes.csv delimiter=, default=SinResultados')}}" 
+    # Buscar el valor de la variable de entorno HOME 
+    - debug: msg="{{lookup('env', 'HOME')}} is the value of HOME"

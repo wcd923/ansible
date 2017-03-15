@@ -1,0 +1,16 @@
+--- # Variables replacement 
+- hosts: '{{myhosts}}'
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: no
+  vars:
+    myhosts: multi
+    file: /home/vagrant/uptime.log
+  tasks:
+  - name: Create uptime log file on every node of a group
+    shell: date > '{{file}}' && uptime >> '{{file}}' 
+  - name: Show created file once
+    command: cat '{{file}}'
+    run_once: true
