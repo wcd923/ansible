@@ -1,0 +1,10 @@
+--- # Send mail
+- hosts: '{{myhosts}}'
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  tasks:
+  - name: Clone git repo 
+    git: repo=https://github.com/wcd923/ansible.git dest=/home/ansible/repo_clonado

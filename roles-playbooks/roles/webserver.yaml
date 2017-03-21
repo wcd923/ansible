@@ -1,0 +1,15 @@
+--- # Master playbook for webservers
+- hosts: centos
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  connection: ssh
+  pre_tasks:
+    - name: Start-time
+      raw: date > /home/vagrant/start-time
+  roles:
+    - webservers
+  post_tasks:
+    - name: Finish-time
+      raw: date > /home/vagrant/finish-time

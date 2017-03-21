@@ -8,7 +8,6 @@
   tasks:
   - name: Send an email
     mail:
-      host='localhost'
       port=25
       to="wcd@923.com"
       subject="This is an email from ansible team"
