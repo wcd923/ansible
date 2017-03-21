@@ -1,0 +1,15 @@
+--- # Send mail
+- hosts: '{{myhosts}}'
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  tasks:
+  - name: Send an email
+    mail:
+      host='localhost'
+      port=25
+      to="wernerdiers@gmail.com"
+      subject="This is an email from ansible team"
+      body="VM {{ansible_hostname}}"

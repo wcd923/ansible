@@ -1,0 +1,9 @@
+--- # Cron example
+- hosts: '{{myhosts}}'
+  remote_user: ansible
+  become: no
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Add cron job to ansible user
+      cron: name="list files" minute="0" hour="1" job="ls -la /etc > /home/ansible/ansible-cron-log.log"

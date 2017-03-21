@@ -1,0 +1,11 @@
+--- # Cron example
+- hosts: centos 
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Execute a command onces in the future.
+      at: command="ls /var/log > /home/ansible/at.log" count=1 units="minutes"
+#      at: command="ls /var/log > /home/ansible/at.log" state=absent # Elimina el job 

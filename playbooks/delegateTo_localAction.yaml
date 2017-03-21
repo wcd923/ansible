@@ -1,0 +1,15 @@
+--- # Delegate to and local action example
+- hosts: '{{myhosts}}'
+  remote_user: vagrant
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  connection: ssh
+  tasks:
+  - name: Ping
+    #local_action: command ping -c 4 10.2.2.3 
+    command: ping -c 4 10.2.2.3
+    delegate_to: 127.0.0.1
+  - name: Install package
+    yum: name=elinks state=latest
+
