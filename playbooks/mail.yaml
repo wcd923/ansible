@@ -10,6 +10,6 @@
     mail:
       host='localhost'
       port=25
-      to="wernerdiers@gmail.com"
+      to="wcd@923.com"
       subject="This is an email from ansible team"
       body="VM {{ansible_hostname}}"
